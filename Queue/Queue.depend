@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1695928199 source:g:\embedded abd el basit\my workspace\queue\queue.c
+	"Queue.h"
+
+1696091191 g:\embedded abd el basit\my workspace\queue\queue.h
+
+1695928328 source:g:\embedded abd el basit\my workspace\queue\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Queue.h"
+

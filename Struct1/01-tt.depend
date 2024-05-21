@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1695660950 source:g:\embedded course\embeeded homeeeeee\code blocks\01-tt\main.c
+	<stdio.h>
+	<stdlib.h>
+	"student.h"
+
+1695654563 source:g:\embedded course\embeeded homeeeeee\code blocks\01-tt\arraystrings.c
+	<stdio.h>
+	<stdlib.h>
+
+1695662224 source:g:\embedded course\embeeded homeeeeee\code blocks\01-tt\student.c
+	"student.h"
+
+1695663047 g:\embedded course\embeeded homeeeeee\code blocks\01-tt\student.h
+
+1695681156 source:g:\embedded abd el basit\my workspace\struct1\arraystrings.c
+	<stdio.h>
+	<stdlib.h>
+	"student.h"
+
+1695836329 source:g:\embedded abd el basit\my workspace\struct1\student.c
+	"student.h"
+
+1695840306 g:\embedded abd el basit\my workspace\struct1\student.h
+
+1695844866 source:g:\embedded abd el basit\my workspace\struct1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"student.h"
+
+1695844900 source:g:\embedded abd el basit\my workspace\struct1\trial.c
+	<stdio.h>
+	<stdlib.h>
+

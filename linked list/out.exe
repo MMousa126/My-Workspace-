@@ -1,0 +1,562 @@
+	.file	"linked_list.c"
+	.text
+	.globl	Create_Node
+	.def	Create_Node;	.scl	2;	.type	32;	.endef
+	.seh_proc	Create_Node
+Create_Node:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$48, %rsp
+	.seh_stackalloc	48
+	.seh_endprologue
+	movl	%ecx, 16(%rbp)
+	movl	$16, %ecx
+	call	malloc
+	movq	%rax, -8(%rbp)
+	movq	-8(%rbp), %rax
+	movl	16(%rbp), %edx
+	movl	%edx, (%rax)
+	movq	-8(%rbp), %rax
+	movq	$0, 8(%rax)
+	movq	-8(%rbp), %rax
+	addq	$48, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.globl	Add_NodeToLast
+	.def	Add_NodeToLast;	.scl	2;	.type	32;	.endef
+	.seh_proc	Add_NodeToLast
+Add_NodeToLast:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$48, %rsp
+	.seh_stackalloc	48
+	.seh_endprologue
+	movl	%ecx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movl	16(%rbp), %ecx
+	call	Create_Node
+	movq	%rax, -16(%rbp)
+	movq	24(%rbp), %rax
+	movq	(%rax), %rax
+	movq	%rax, -8(%rbp)
+	movq	24(%rbp), %rax
+	movq	(%rax), %rax
+	testq	%rax, %rax
+	jne	.L5
+	movq	24(%rbp), %rax
+	movq	-16(%rbp), %rdx
+	movq	%rdx, (%rax)
+	jmp	.L5
+.L6:
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, -8(%rbp)
+.L5:
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rax
+	testq	%rax, %rax
+	jne	.L6
+	movq	-8(%rbp), %rax
+	movq	-16(%rbp), %rdx
+	movq	%rdx, 8(%rax)
+	nop
+	addq	$48, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.globl	Add_NodeToFirst
+	.def	Add_NodeToFirst;	.scl	2;	.type	32;	.endef
+	.seh_proc	Add_NodeToFirst
+Add_NodeToFirst:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$48, %rsp
+	.seh_stackalloc	48
+	.seh_endprologue
+	movl	%ecx, 16(%rbp)
+	movq	%rdx, 24(%rbp)
+	movl	16(%rbp), %ecx
+	call	Create_Node
+	movq	%rax, -8(%rbp)
+	movq	24(%rbp), %rax
+	movq	(%rax), %rdx
+	movq	-8(%rbp), %rax
+	movq	%rdx, 8(%rax)
+	movq	24(%rbp), %rax
+	movq	-8(%rbp), %rdx
+	movq	%rdx, (%rax)
+	nop
+	addq	$48, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section .rdata,"dr"
+.LC0:
+	.ascii "%d       \0"
+	.text
+	.globl	Print_LinkedList
+	.def	Print_LinkedList;	.scl	2;	.type	32;	.endef
+	.seh_proc	Print_LinkedList
+Print_LinkedList:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	jmp	.L9
+.L10:
+	movq	16(%rbp), %rax
+	movl	(%rax), %eax
+	movl	%eax, %edx
+	leaq	.LC0(%rip), %rcx
+	call	printf
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, 16(%rbp)
+.L9:
+	cmpq	$0, 16(%rbp)
+	jne	.L10
+	nop
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.globl	Edit_Node
+	.def	Edit_Node;	.scl	2;	.type	32;	.endef
+	.seh_proc	Edit_Node
+Edit_Node:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movl	%edx, 24(%rbp)
+	movl	%r8d, 32(%rbp)
+	jmp	.L12
+.L15:
+	movq	16(%rbp), %rax
+	movl	(%rax), %eax
+	cmpl	24(%rbp), %eax
+	jne	.L13
+	movq	16(%rbp), %rax
+	movl	32(%rbp), %edx
+	movl	%edx, (%rax)
+	movl	$1, %eax
+	jmp	.L14
+.L13:
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, 16(%rbp)
+.L12:
+	cmpq	$0, 16(%rbp)
+	jne	.L15
+	movl	$0, %eax
+.L14:
+	popq	%rbp
+	ret
+	.seh_endproc
+	.globl	Insert_After
+	.def	Insert_After;	.scl	2;	.type	32;	.endef
+	.seh_proc	Insert_After
+Insert_After:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$48, %rsp
+	.seh_stackalloc	48
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movl	%edx, 24(%rbp)
+	movl	%r8d, 32(%rbp)
+	movq	16(%rbp), %rax
+	movq	%rax, -8(%rbp)
+	cmpq	$0, 16(%rbp)
+	jne	.L17
+	movl	$0, %eax
+	jmp	.L18
+.L17:
+	movl	32(%rbp), %eax
+	movl	%eax, %ecx
+	call	Create_Node
+	movq	%rax, -16(%rbp)
+	jmp	.L19
+.L21:
+	movq	-8(%rbp), %rax
+	movl	(%rax), %eax
+	cmpl	24(%rbp), %eax
+	jne	.L20
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rdx
+	movq	-16(%rbp), %rax
+	movq	%rdx, 8(%rax)
+	movq	-8(%rbp), %rax
+	movq	-16(%rbp), %rdx
+	movq	%rdx, 8(%rax)
+	movl	$1, %eax
+	jmp	.L18
+.L20:
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, -8(%rbp)
+.L19:
+	cmpq	$0, -8(%rbp)
+	jne	.L21
+	movl	$0, %eax
+.L18:
+	addq	$48, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.globl	Remove_NodeFromEnd
+	.def	Remove_NodeFromEnd;	.scl	2;	.type	32;	.endef
+	.seh_proc	Remove_NodeFromEnd
+Remove_NodeFromEnd:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	jmp	.L23
+.L24:
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, 16(%rbp)
+.L23:
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	8(%rax), %rax
+	testq	%rax, %rax
+	jne	.L24
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, %rcx
+	call	free
+	movq	16(%rbp), %rax
+	movq	$0, 8(%rax)
+	nop
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.globl	Remove_NodeFromFirst
+	.def	Remove_NodeFromFirst;	.scl	2;	.type	32;	.endef
+	.seh_proc	Remove_NodeFromFirst
+Remove_NodeFromFirst:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$48, %rsp
+	.seh_stackalloc	48
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	16(%rbp), %rax
+	movq	(%rax), %rax
+	movq	%rax, -8(%rbp)
+	cmpq	$0, -8(%rbp)
+	jne	.L26
+	movl	$0, %eax
+	jmp	.L27
+.L26:
+	movq	16(%rbp), %rax
+	movq	(%rax), %rax
+	movq	8(%rax), %rdx
+	movq	16(%rbp), %rax
+	movq	%rdx, (%rax)
+	movq	-8(%rbp), %rax
+	movq	%rax, %rcx
+	call	free
+	movl	$1, %eax
+.L27:
+	addq	$48, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.globl	Remove_Node
+	.def	Remove_Node;	.scl	2;	.type	32;	.endef
+	.seh_proc	Remove_Node
+Remove_Node:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$48, %rsp
+	.seh_stackalloc	48
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movl	%edx, 24(%rbp)
+	movq	16(%rbp), %rax
+	movq	(%rax), %rax
+	movq	%rax, -8(%rbp)
+	movq	16(%rbp), %rax
+	movq	(%rax), %rax
+	testq	%rax, %rax
+	jne	.L29
+	movl	$0, %eax
+	jmp	.L28
+.L29:
+	movq	16(%rbp), %rax
+	movq	(%rax), %rax
+	movl	(%rax), %eax
+	cmpl	24(%rbp), %eax
+	jne	.L33
+	movq	16(%rbp), %rax
+	movq	(%rax), %rax
+	movq	%rax, -16(%rbp)
+	movq	16(%rbp), %rax
+	movq	(%rax), %rax
+	movq	8(%rax), %rdx
+	movq	16(%rbp), %rax
+	movq	%rdx, (%rax)
+	movq	-16(%rbp), %rax
+	movq	%rax, %rcx
+	call	free
+	jmp	.L28
+.L35:
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rax
+	movl	(%rax), %eax
+	cmpl	24(%rbp), %eax
+	jne	.L34
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, -16(%rbp)
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	8(%rax), %rdx
+	movq	-8(%rbp), %rax
+	movq	%rdx, 8(%rax)
+	movq	-16(%rbp), %rax
+	movq	%rax, %rcx
+	call	free
+	movl	$1, %eax
+	jmp	.L28
+.L34:
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, -8(%rbp)
+.L33:
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rax
+	testq	%rax, %rax
+	jne	.L35
+	movl	$0, %eax
+.L28:
+	addq	$48, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.globl	Remove_NodeFromMiddle
+	.def	Remove_NodeFromMiddle;	.scl	2;	.type	32;	.endef
+	.seh_proc	Remove_NodeFromMiddle
+Remove_NodeFromMiddle:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$48, %rsp
+	.seh_stackalloc	48
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movl	%edx, 24(%rbp)
+	movq	16(%rbp), %rax
+	movq	%rax, -8(%rbp)
+	jmp	.L37
+.L40:
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movl	(%rax), %eax
+	cmpl	24(%rbp), %eax
+	jne	.L38
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, -8(%rbp)
+	movq	-8(%rbp), %rax
+	movq	%rax, %rcx
+	call	free
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	8(%rax), %rdx
+	movq	16(%rbp), %rax
+	movq	%rdx, 8(%rax)
+	movl	$1, %eax
+	jmp	.L39
+.L38:
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, 16(%rbp)
+.L37:
+	cmpq	$0, 16(%rbp)
+	jne	.L40
+	movl	$0, %eax
+.L39:
+	addq	$48, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section .rdata,"dr"
+.LC1:
+	.ascii "%d    \0"
+	.text
+	.globl	displayReverse
+	.def	displayReverse;	.scl	2;	.type	32;	.endef
+	.seh_proc	displayReverse
+displayReverse:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$32, %rsp
+	.seh_stackalloc	32
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	cmpq	$0, 16(%rbp)
+	je	.L44
+	movq	16(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, %rcx
+	call	displayReverse
+	movq	16(%rbp), %rax
+	movl	(%rax), %eax
+	movl	%eax, %edx
+	leaq	.LC1(%rip), %rcx
+	call	printf
+	jmp	.L41
+.L44:
+	nop
+.L41:
+	addq	$32, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section .rdata,"dr"
+.LC2:
+	.ascii "%d   \0"
+	.text
+	.globl	Reverse_list
+	.def	Reverse_list;	.scl	2;	.type	32;	.endef
+	.seh_proc	Reverse_list
+Reverse_list:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$48, %rsp
+	.seh_stackalloc	48
+	.seh_endprologue
+	movq	%rcx, 16(%rbp)
+	movq	16(%rbp), %rax
+	movq	%rax, -8(%rbp)
+	movl	$0, -12(%rbp)
+	jmp	.L46
+.L47:
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, -8(%rbp)
+	addl	$1, -12(%rbp)
+.L46:
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rax
+	testq	%rax, %rax
+	jne	.L47
+	jmp	.L48
+.L51:
+	movq	16(%rbp), %rax
+	movq	%rax, -8(%rbp)
+	movl	$0, -16(%rbp)
+	jmp	.L49
+.L50:
+	movq	-8(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, -8(%rbp)
+	addl	$1, -16(%rbp)
+.L49:
+	movl	-16(%rbp), %eax
+	cmpl	-12(%rbp), %eax
+	jl	.L50
+	movq	-8(%rbp), %rax
+	movl	(%rax), %eax
+	movl	%eax, %edx
+	leaq	.LC2(%rip), %rcx
+	call	printf
+	subl	$1, -12(%rbp)
+.L48:
+	cmpl	$0, -12(%rbp)
+	jns	.L51
+	nop
+	addq	$48, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.section .rdata,"dr"
+.LC3:
+	.ascii "%d     \0"
+	.text
+	.globl	Reverse_listusing_Array_ofAddresses
+	.def	Reverse_listusing_Array_ofAddresses;	.scl	2;	.type	32;	.endef
+	.seh_proc	Reverse_listusing_Array_ofAddresses
+Reverse_listusing_Array_ofAddresses:
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	subq	$848, %rsp
+	.seh_stackalloc	848
+	leaq	128(%rsp), %rbp
+	.seh_setframe	%rbp, 128
+	.seh_endprologue
+	movq	%rcx, 736(%rbp)
+	movq	736(%rbp), %rax
+	movq	%rax, 712(%rbp)
+	movl	$0, 708(%rbp)
+	jmp	.L53
+.L54:
+	movl	708(%rbp), %eax
+	cltq
+	movq	712(%rbp), %rdx
+	movq	%rdx, -96(%rbp,%rax,8)
+	movq	712(%rbp), %rax
+	movq	8(%rax), %rax
+	movq	%rax, 712(%rbp)
+	addl	$1, 708(%rbp)
+.L53:
+	cmpq	$0, 712(%rbp)
+	jne	.L54
+	movl	708(%rbp), %eax
+	subl	$1, %eax
+	movl	%eax, 704(%rbp)
+	jmp	.L55
+.L56:
+	movl	704(%rbp), %eax
+	cltq
+	movq	-96(%rbp,%rax,8), %rax
+	movl	(%rax), %eax
+	movl	%eax, %edx
+	leaq	.LC3(%rip), %rcx
+	call	printf
+	subl	$1, 704(%rbp)
+.L55:
+	cmpl	$0, 704(%rbp)
+	jns	.L56
+	nop
+	addq	$848, %rsp
+	popq	%rbp
+	ret
+	.seh_endproc
+	.ident	"GCC: (x86_64-posix-seh-rev1, Built by MinGW-W64 project) 6.2.0"
+	.def	malloc;	.scl	2;	.type	32;	.endef
+	.def	printf;	.scl	2;	.type	32;	.endef
+	.def	free;	.scl	2;	.type	32;	.endef

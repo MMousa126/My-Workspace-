@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1696187787 source:g:\embedded abd el basit\my workspace\stack\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Stack.h"
+
+1696187613 source:g:\embedded abd el basit\my workspace\stack\stack.c
+	"Stack.h"
+
+1696187650 g:\embedded abd el basit\my workspace\stack\stack.h
+
